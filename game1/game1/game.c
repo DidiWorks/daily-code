@@ -1,15 +1,15 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include"game.h"
 
-					void InitBoard(char board[ROW][COL], int row, int col)
+					void InitBoard(char board[ROW][COL], int row, int col)  //准备棋盘数据，让棋盘显示空格
 					{
 						int i = 0;
 						int j = 0;
-						for (i = 0; i < row; i++)
+						for (i = 0; i < row; i++)  //设置i小于row外循环
 						{
-							for (j = 0; j < col; j++)
+							for (j = 0; j < col; j++)//设置j小于row内循环
 							{
-								board[i][j] = ' ';
+								board[i][j] = ' '; //从[0][0]到[3][3]每个数组中存储一个空格
 							}
 						}
 					}
@@ -26,7 +26,7 @@
 					//		printf("---|---|---\n");
 					//	}
 					//}
-					void DispalyBoard(char board[ROW][COL], int row, int col)
+					void DispalyBoard(char board[ROW][COL], int row, int col) // 显示棋盘，让棋盘内显示‘|’ ‘-’，来充当三子棋盘
 					{
 						int i = 0;
 						for (i = 0; i < row; i++)
@@ -36,21 +36,21 @@
 							int j = 0;
 							for (j = 0; j < col; j++)
 							{
-								printf(" %c ", board[i][j]);
-								if (j < col - 1)
-									printf("|");
+								printf(" %c ", board[i][j]);  //循环数组打印空格，空格在InitBoard里实现，实际存储在数组是打印美化棋盘
+								if (j < col - 1)   //因为数组是0-2，但是实际上在打印中是1-3，所以col-1循环并且比j小，如果不-1会多打印
+									printf("|"); 
 							}
-							printf("\n");
-							//print segmentation information
-							if (i < row - 1)
+							printf("\n");     //跑完第一行，然后换行
+							
+							if (i < row - 1)  //打印下一行，让row-1保持0-2棋盘顺序正确
 							{
 								/*printf("---|---|---\n");*/
 								int j = 0;
-								for (j = 0; j < col; j++)
+								for (j = 0; j < col; j++) 
 								{
-									printf("---");
-									if (j < col - 1)
-										printf("|");
+									printf("---");   //先打印---
+									if (j < col - 1)     
+										printf("|");//后打印|
 								}
 								printf("\n");
 							}
