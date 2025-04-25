@@ -1,0 +1,22 @@
+; 让鼠标缓慢移动，避免瞬移检测
+SmoothMove(x, y, speed := 30) {
+    MouseGetPos, startX, startY  ; 记录起始位置
+    MouseGetPos, currX, currY
+    stepX := (x - currX) // speed
+    stepY := (y - currY) // speed
+
+    Loop, %speed% {
+        ; 简单检查鼠标是否被人为移动
+        MouseGetPos, nowX, nowY
+        if (nowX != currX || nowY != currY) {
+            Log("检测到用户操作，脚本退出")
+            ExitApp  ; 直接退出整个脚本
+        }
+        
+        currX += stepX
+        currY += stepY
+        MouseMove, %currX%, %currY%, 0
+        Sleep, 15
+    }
+    MouseMove, x, y, 0
+}
