@@ -1,0 +1,170 @@
+#Persistent
+#SingleInstance, Force
+SetControlDelay, -1
+SetMouseDelay, 20
+SetWinDelay, 200
+SetBatchLines, 20ms
+CoordMode, Mouse, Screen
+RunAsAdmin()
+
+; 全局变量
+global RefreshInProgress := false
+global ErrorCount := 0
+global MaxErrors := 3
+
+; [新增] 添加鼠标检测定时器
+SetTimer, WatchMouseClick, 100
+
+; 直接执行刷新
+Refresh()
+
+; [新增] 鼠标点击检测函数
+WatchMouseClick:
+    if (!RefreshInProgress)
+        return
+        
+    ; 检测鼠标左键状态
+    GetKeyState, LButton, LButton, P
+    
+    ; 如果检测到鼠标左键被按下
+    if (LButton == "D") {
+        Log("检测到鼠标左键点击，脚本退出")
+        ExitApp
+    }
+return
+
+; 主刷新功能
+Refresh() {
+    RefreshInProgress := true
+    
+    ; 检查并确保iVMS-4200运行
+    if (!CheckIVMS()) {
+        Log("iVMS-4200未运行，尝试启动...")
+        CheckAndRestartIVMS()
+        Sleep, 15000
+    }
+    
+    ; 激活iVMS-4200窗口
+    SetTitleMatchMode, 2
+    WinActivate, iVMS-4200
+    WinWaitActive, iVMS-4200, , 10
+    if !WinActive("iVMS-4200") {
+        ErrorCount++
+        Log("错误：无法激活iVMS-4200窗口！错误次数: " . ErrorCount)
+        if (ErrorCount >= MaxErrors) {
+            RestartIVMS()
+            ErrorCount := 0
+        }
+        RefreshInProgress := false
+        return
+    }
+    Sleep, 2000
+    
+    ; 退出全屏模式
+    Send, {Esc}
+    Sleep, 2000
+    
+    ; 定义每组操作的坐标
+    Groups := []
+    Groups.Push({LoopX: 1656, LoopY: 260, NodeX: 140, NodeY: 170})   ; 第1组
+    Groups.Push({LoopX: 1297, LoopY: 248, NodeX: 146, NodeY: 396})   ; 第2组
+    Groups.Push({LoopX: 864, LoopY: 215, NodeX: 150, NodeY: 266})    ; 第3组
+    Groups.Push({LoopX: 483, LoopY: 211, NodeX: 162, NodeY: 330})    ; 第4组
+    Groups.Push({LoopX: 1679, LoopY: 534, NodeX: 141, NodeY: 360})   ; 第5组
+    Groups.Push({LoopX: 1301, LoopY: 527, NodeX: 155, NodeY: 204})   ; 第6组
+    Groups.Push({LoopX: 908, LoopY: 531, NodeX: 146, NodeY: 810})    ; 第7组
+    Groups.Push({LoopX: 488, LoopY: 539, NodeX: 173, NodeY: 934})    ; 第8组
+    Groups.Push({LoopX: 1716, LoopY: 826, NodeX: 169, NodeY: 935})   ; 第9组
+    Groups.Push({LoopX: 1301, LoopY: 802, NodeX: 165, NodeY: 938})   ; 第10组
+    Groups.Push({LoopX: 909, LoopY: 826, NodeX: 157, NodeY: 906})    ; 第11组
+    Groups.Push({LoopX: 507, LoopY: 818, NodeX: 159, NodeY: 936})    ; 第12组
+
+    ; 遍历每组操作
+    for index, group in Groups {
+        Try {
+            Log("开始刷新第 " index " 组摄像头...")
+            
+            SmoothMove(group.LoopX, group.LoopY, 30)
+            Sleep, 4000
+            Click
+            
+            SmoothMove(group.NodeX, group.NodeY, 30)
+            Sleep, 4000
+            Click, 2
+            
+            Sleep, 4000
+            Click, 2
+            
+            Log("第 " index " 组摄像头刷新完成。")
+            Sleep, 10000
+            
+            ; 每2组释放一次内存
+            if (Mod(index, 2) = 0) {
+                DllCall("psapi.dll\EmptyWorkingSet", "UInt", -1)
+                Sleep, 5000
+            }
+        } Catch e {
+            Log("操作失败：第 " index " 组摄像头刷新失败")
+            ErrorCount++
+            if (ErrorCount >= 3) {
+                break
+            }
+            Send, {Esc}
+            Sleep, 2000
+        }
+    }
+    
+    ; 最后点击全屏按钮
+    SmoothMove(1851, 989, 30)
+    Sleep, 3000
+    Click
+    
+    RefreshInProgress := false
+    ErrorCount := 0
+    
+    ; 完成后退出脚本
+    Log("所有操作完成，脚本正常退出")
+    ExitApp
+}
+
+; 基础函数
+SmoothMove(x, y, speed := 30) {
+    MouseGetPos, currX, currY
+    stepX := (x - currX) / speed
+    stepY := (y - currY) / speed
+    Loop, %speed% {
+        currX += stepX
+        currY += stepY
+        MouseMove, %currX%, %currY%, 0
+        Sleep, 20
+    }
+    MouseMove, x, y, 0
+}
+
+CheckIVMS() {
+    return WinExist("iVMS-4200")
+}
+
+CheckAndRestartIVMS() {
+    Run, "C:\Program Files (x86)\iVMS-4200 Site\iVMS-4200 Client\Client\iVMS-4200.Framework.C.exe"
+    Sleep, 15000
+}
+
+RestartIVMS() {
+    Process, Close, iVMS-4200.Framework.C.exe
+    Sleep, 5000
+    Run, "C:\Program Files (x86)\iVMS-4200 Site\iVMS-4200 Client\Client\iVMS-4200.Framework.C.exe"
+    Sleep, 15000
+}
+
+RunAsAdmin() {
+    if not A_IsAdmin {
+        Run *RunAs "%A_ScriptFullPath%"
+        ExitApp
+    }
+}
+
+Log(message) {
+    LogFilePath := A_Desktop . "\script_log.txt"
+    FileAppend, %A_Now% - %message%`n, %LogFilePath%
+}
