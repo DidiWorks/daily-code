@@ -30,23 +30,23 @@
 								while(1)
 								{
 									playerMove(board,ROW,COL); // 玩家下棋
-									ret=IsWin(board,ROW,COL); //如果返回C玩家胜利
+									ret=IsWin(board,ROW,COL); //胜利条件
 									{
-									     if(ret!='C')  //如果不返回跳出
+									     if(ret!='C')  //当代码不等于C时跳出，也就是代码当前一直在执行C
 										 {
 											 break;
 										 }
 									}
 									DispalyBoard(board, ROW,COL); //打印棋盘
 									ComeputerMove(board,ROW,COL);  //电脑下棋逻辑
-									ret =IsWin(board,ROW,COL);  //如果返回C电脑胜利胜利
+									ret =IsWin(board,ROW,COL);  
 									if(ret !='C')       //
 									{
-										break;  //如果不返回跳出
+										break;  
 									}
 									Dispalyboard(board,ROW,COL);  //最后打印棋盘
 								}
-								if(ret == '*')       //在这里判断谁赢的条件 
+								if(ret == '*')       //在这里判断谁赢的条件 如果不等于c也就是没下完才跳到这里
 								{
 									printf("玩家赢\n");
 								}
