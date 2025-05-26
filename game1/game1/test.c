@@ -57,7 +57,7 @@
 
                                         int main()
                                         {
-                                            stand((unsigned int)time(NULL));  // 设置随机数种子
+                                            srand((unsigned int)time(NULL));  // 设置随机数种子
                                             int input = 0;
                                             do  // 使用do while循环实现菜单逻辑
                                             {
