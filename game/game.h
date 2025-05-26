@@ -21,4 +21,4 @@ void playerMove(char board[ROW][COl],int row, int col);    //玩家下棋逻辑
 void ComeputerMove(char borad[ROW][COL], int row ,int col);  //电脑下棋逻辑  
 
 
-void IsWin(char borad[ROW][COL], int row ,int col)   //胜利时
+char IsWin(char borad[ROW][COL], int row ,int col)   //胜利时
