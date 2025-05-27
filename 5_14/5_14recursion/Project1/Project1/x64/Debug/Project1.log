@@ -1,6 +1,0 @@
-﻿  test1.c
-E:\code\2022\Project1\Project1\test1.c(126,9): warning C4477: 'printf' : format string '%d' requires an argument of type 'int', but variadic argument 1 has type 'size_t'
-  E:\code\2022\Project1\Project1\test1.c(126,9):
-  consider using '%zd' in the format string
-  
-  Project1.vcxproj -> E:\code\2022\Project1\x64\Debug\Project1.exe
