@@ -61,7 +61,7 @@
 							}
 							int main()
 							{ 
-							   srand((unsigned int)time(NULL));   //在主函数中设置随机值让电脑下棋逻辑生成随机值
+							   stand((unsigned int)time(NULL));   //在主函数中设置随机值让电脑下棋逻辑生成随机值
 								int input = 0;      
 								do                //这里用do while 循环的逻辑是因为，我们需要直接看到菜单选择并且无线循环下去
 								{
