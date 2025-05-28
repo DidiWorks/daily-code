@@ -22,7 +22,7 @@ void playerBoard(char board[ROW][COL], int row, int col);
 
 void ComputerBoard(char board[ROW][COL], int row, int col);
 
-char IsWin(char baord[ROW][COL], int row, int col);
+char IsWin(char board[ROW][COL], int row, int col);
 
 int Isfull(char board[ROW][COL], int row, int col);
 
