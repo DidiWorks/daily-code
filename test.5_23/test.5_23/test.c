@@ -3,7 +3,7 @@
 #include<stdio.h>
 
 
-������A�����ݺ�����B�е����ݽ��н���������һ���󣩣��������ڲ���Χ���пɿؽ���
+将数组A的内容和数组B中的内容进行交换（数组一样大），对数组内部范围进行可控交换
 int fan(char arr1[], char arr2[], int left, int right)
 {
 	while (left < right) {
@@ -32,7 +32,7 @@ int main()
 	return 0;
 }
 
-int my_strlen(char* str)  //strlen����ʵ��
+int my_strlen(char* str)  //strlen函数实现
 {
 	int count = 0;
 	while (*str != 0)
@@ -67,7 +67,7 @@ void init(int arr[],int se)
 {
 	for (int i = 0; i < se; i++)
 	{
-		arr[i] = 0;   //��ʼ������Ϊ0
+		arr[i] = 0;   //初始化数组为0
 	}
 }
 
@@ -89,9 +89,9 @@ int main()
 {
 	int arr1[] = { 1,2,4,5,6,7 };
 	int arr2[] = { 2,4,6,7,8,10 };
-	int se = sizeof(arr1) / sizeof(arr1[0]);  //Ԫ�ظ���=�ܴ�С/��һ��Ԫ�صĴ�С
+	int se = sizeof(arr1) / sizeof(arr1[0]);  //元素个数=总大小/第一个元素的大小
 	int i = 0;
-	for (  i = 0; i < se; i++);   //����������н���
+	for (  i = 0; i < se; i++);   //整个数组进行交换
 	{
 		int tmp = arr1[i];
 		arr1[i] = arr2[i];
@@ -117,10 +117,10 @@ int main()
 {   
 	int i = 0;
 	int arr[] = { 7,3,4,5,6,9 };
-	int se = sizeof(arr) / sizeof(arr[0]);//��������
-	for ( i = 0; i < se-1; i++)   //�ⲿѭ��Ϊi--0-6��Ҳ����˵�ⲿһ�ξ�����һ����
+	int se = sizeof(arr) / sizeof(arr[0]);//数组总数
+	for ( i = 0; i < se-1; i++)   //外部循环为i--0-6，也就是说外部一次就能排一个数
 	{
-		for (int j = 0; j < se - i - 1; j++)  //Ȼ�����ⲿѭ��ÿ��ѭ�������ֵ�ŵ�����
+		for (int j = 0; j < se - i - 1; j++)  //然后让外部循环每次循环的最大值排到后面
 		{
 			if (arr[j] > arr[j + 1])
 			{
@@ -142,6 +142,8 @@ int main()
 	return 0;
 }
 
+
+//数组
 void reverse(int arr[], int left, int right)
 {
 	while (left > right)
