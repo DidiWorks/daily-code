@@ -8,7 +8,7 @@
 #include <time.h>
 
 
-//³õÊ¼»¯ÆåÅÌ£¬´òÓ¡ÆåÅÌ£¬Íæ¼ÒÏÂÆå£¬µçÄÔÏÂÆå£¬Ê¤¸ºÅĞ¶¨
+//åˆå§‹åŒ–æ£‹ç›˜ï¼Œæ‰“å°æ£‹ç›˜ï¼Œç©å®¶ä¸‹æ£‹ï¼Œç”µè„‘ä¸‹æ£‹ï¼Œèƒœè´Ÿåˆ¤å®š
 
 
 #define ROW  3
@@ -22,7 +22,7 @@ void playerBoard(char board[ROW][COL], int row, int col);
 
 void ComputerBoard(char board[ROW][COL], int row, int col);
 
-char IsWin(char baord[ROW][COL], int row, int col);
+char IsWin(char board[ROW][COL], int row, int col);
 
 int Isfull(char board[ROW][COL], int row, int col);
 
