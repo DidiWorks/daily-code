@@ -22,10 +22,11 @@ void DisplayBaord(char board[ROWS][COLS], int row, int col)
 	int i = 0;
 	int j = 0;
 	printf("------------Minesweeper game--------------\n");
-	/*for (i = 0; i < row; i++)
+	for (j = 0; i < col; i++)
 	{
-		printf("%d", j);
-	}*/
+		printf("%d ", j);
+	}
+	printf("\n");
 	for (i = 1; i <= row; i++)
 	{
 		printf("%d ", i);

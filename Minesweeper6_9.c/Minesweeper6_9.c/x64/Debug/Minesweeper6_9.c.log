@@ -1,0 +1,3 @@
+﻿  game.c
+E:\GitHub_code\daily-code\Minesweeper6_9.c\Minesweeper6_9.c\game.c(315,49): warning C4554: '&': check operator precedence for possible error; use parentheses to clarify precedence
+  Minesweeper6_9.c.vcxproj -> E:\GitHub_code\daily-code\Minesweeper6_9.c\x64\Debug\Minesweeper6_9.c.exe

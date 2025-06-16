@@ -14,4 +14,4 @@
 
 void InitBoard(char board[ROWS][COLS], int rows, int cols,char set);
 void DisplayBaord(char board[ROWS][COLS], int row, int col);
-void setMine(char board[ROWS][COLS], int row, int col);
+//void setMine(char board[ROWS][COLS], int row, int col);
