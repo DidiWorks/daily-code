@@ -1,7 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include<string.h>
 #include<stdio.h>
-
+//
 //print every num
 
 //void fan(int i)
@@ -11,8 +11,8 @@
 //		printf("%d", i);
 //		return;
 //	}
-//	fan(i / 10);    //´¦ÀíµÍÎ»Ò²¾ÍÊÇ¿¿×îÓÒ±ßµÄÊı
-//	printf("%d", i % 10);  // ´¦Àí¸ßÎ»Ò²¾ÍÊÇ¿¿×î×ó±ßµÄÊı
+//	fan(i / 10);    //å¤„ç†ä½ä½ä¹Ÿå°±æ˜¯é æœ€å³è¾¹çš„æ•°
+//	printf("%d", i % 10);  // å¤„ç†é«˜ä½ä¹Ÿå°±æ˜¯é æœ€å·¦è¾¹çš„æ•°
 //
 //}
 //
@@ -61,13 +61,13 @@
 //
 //void fan(char* str)
 //{
-//	char tmp = *str;       //Õâ¸öÎ»ÖÃ*strÊÇÊ××Ö·û¸³Öµ¸øtmp
+//	char tmp = *str;       //è¿™ä¸ªä½ç½®*stræ˜¯é¦–å­—ç¬¦èµ‹å€¼ç»™tmp
 //	int len = my_strlen(str);
 //	*str = *(str + len - 1);
 //	*(str + len - 1) = '\0';
-//	if (my_strlen(str + 1) >= 2)  //Èç¹û½»»»¹ıºó³¤¶È>2
-//		fan(str + 1);      //º¯ÊıÄÚ²¿+1,ÏòÇ°Æ«ÒÆ
-//	*(str + len - 1) = tmp;  //×îºóÈÃtmp=
+//	if (my_strlen(str + 1) >= 2)  //å¦‚æœäº¤æ¢è¿‡åé•¿åº¦>2
+//		fan(str + 1);      //å‡½æ•°å†…éƒ¨+1,å‘å‰åç§»
+//	*(str + len - 1) = tmp;  //æœ€åè®©tmp=
 //}
 //
 //
@@ -99,7 +99,7 @@
 //	char str[] = "abcdefg";
 //	int left = 0;
 //	int right = strlen(str) - 1;
-//	int ret=fan(str, left, right);  //ÕâÀï²»ÄÜÈÃfanµÈÓÚret
+//	int ret=fan(str, left, right);  //è¿™é‡Œä¸èƒ½è®©fanç­‰äºret
 //
 //	printf("%s", ret);
 //	return 0;
@@ -107,7 +107,7 @@
 
 
 // print the sum of each digit of a number
-// ÈÃÒ»¸öÊıµÄÃ¿Ò»Î»Ïà¼Ó
+// è®©ä¸€ä¸ªæ•°çš„æ¯ä¸€ä½ç›¸åŠ 
 //  fan(n/10)
 //  123124
 //  12312
