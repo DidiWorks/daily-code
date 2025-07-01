@@ -7,7 +7,7 @@
 #include<time.h>
 #include<math.h>
 #include"game.h"
-
+ 
 menu() {
 
 	printf("*****************************\n");
@@ -31,7 +31,7 @@ int main()
 	do
 	{
 		menu();
-		printf("ÇëÑ¡Ôñ>");
+		printf("è¯·é€‰æ‹©>");
 		scanf("%d", &input);
 		switch (input)
 		{
@@ -39,10 +39,10 @@ int main()
 			game();
 			break;
 		case 0:
-			printf("ÍË³öÓÎÏ·\n");
+			printf("é€€å‡ºæ¸¸æˆ\n");
 			break;
 		default:
-			printf("Ñ¡Ôñ´íÎó\n");
+			printf("é€‰æ‹©é”™è¯¯\n");
 			break;
 		}
 

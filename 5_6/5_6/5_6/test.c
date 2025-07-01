@@ -6,16 +6,16 @@
 
 int fan(int i)
 {
-	if (i < 10)  //Í£Ö¹Ìõ¼ş
+	if (i < 10)  //åœæ­¢æ¡ä»¶
 	{
-		printf("%d", i);  //Ğ¡ÓÚ10Ê±ºò´òÓ¡
+		printf("%d", i);  //å°äº10æ—¶å€™æ‰“å°
 			return;      
 	}
-	fan(i / 10);					//	´«µİÌõ¼ş
+	fan(i / 10);					//	ä¼ é€’æ¡ä»¶
 									//	  When a funciton is pushed onto the stack, the cuurent 
 									//	  execution will be suspended,waiting for the child funciton to return,that
 									//	   is,when calling a function within a fuction, it will be suspended 
-									//    µ±º¯ÊıÑ¹Õ»Ê±£¬µ±Ç°Ö´ĞĞ»á±»¹ÒÆğ£¬µÈ´ı×Óº¯Êı·µ»Ø£¬Ò²¾ÍÊÇËµÔÚº¯ÊıÄÚ²¿µ÷ÓÃº¯ÊıµÄÊ±ºò»á±»¹ÒÆğ
+									//    å½“å‡½æ•°å‹æ ˆæ—¶ï¼Œå½“å‰æ‰§è¡Œä¼šè¢«æŒ‚èµ·ï¼Œç­‰å¾…å­å‡½æ•°è¿”å›ï¼Œä¹Ÿå°±æ˜¯è¯´åœ¨å‡½æ•°å†…éƒ¨è°ƒç”¨å‡½æ•°çš„æ—¶å€™ä¼šè¢«æŒ‚èµ·
 	printf("%d", i % 10);
 }
 
@@ -35,7 +35,7 @@ int main()
 	char arr[] = "abcdefg"; //0-6
 	int es = sizeof(arr) / sizeof(arr[0]);
 	int left = 0;
-	int right = es - 2; // £¬Ò»¹²ÊÇ8¸ö×Ö·û£¬Ç°Ãæ»¹ÒªËãÉÏ0£¬ËùÒÔÊÇ0-6£¬ĞèÒª¼õ2
+	int right = es - 2; // ï¼Œä¸€å…±æ˜¯8ä¸ªå­—ç¬¦ï¼Œå‰é¢è¿˜è¦ç®—ä¸Š0ï¼Œæ‰€ä»¥æ˜¯0-6ï¼Œéœ€è¦å‡2
 	while (left < right)
 	{
 		char tmp = arr[left];
@@ -48,7 +48,7 @@ int main()
 	printf("%s\n", arr);
 	return 0;
 }
-
+ 
 //practise
 
 int main()
@@ -87,7 +87,7 @@ void revesl(char arr[])
 
 int main()
 {
-	char arr[] = "abcdefg";//ÕâÀï±ğÍü¼Ç¼Ó[]
+	char arr[] = "abcdefg";//è¿™é‡Œåˆ«å¿˜è®°åŠ []
 
 	revesl(arr);
 	printf("%s", arr);

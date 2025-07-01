@@ -18,7 +18,7 @@ global MaxErrors := 3
 SetTimer, WatchMouseClick, 100  //鼠标定时检测器
 
 Refresh()//脚本打开直接运行刷新，脚本允许先调用后定义。
-
+ 
 鼠标点击退出函数：
     如果没有在刷新
 	 返回
