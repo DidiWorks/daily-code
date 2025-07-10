@@ -20,18 +20,28 @@
 7-10 
 今天学了什么
       时间4小时
-             完成图像识别输出excel         
+             完成图像识别输出excel  
+             
       解决问题 
              panden环境安装
+             
       卡住的点 
+      
              整个流程几乎是AI辅助
+             
       发现缺的知识
-                              功能块	使用的库	你需要掌握的点
-                 图像读取	cv2, os	摄像头采集、截图保存
-                 OCR识别	PaddleOCR, Tesseract	参数配置、区域识别
-                 文本处理	re, str, split	正则表达式、字符串提取
-                 文件生成	docx, xlsxwriter	Word/Excel格式化写入
-                 脚本控制	argparse, time	命令行传参、批量执行
+                     
+                 功能块	    使用的库	                你需要掌握的点
+                 
+                 图像读取	cv2, os	                 摄像头采集、截图保存
+                 
+                 OCR识别	PaddleOCR, Tesseract	 参数配置、区域识别
+                 
+                 文本处理	re, str, split	         正则表达式、字符串提取
+                 
+                 文件生成	docx, xlsxwriter	     Word/Excel格式化写入
+                 
+                 脚本控制	argparse, time	         命令行传参、批量执行
 
 
 
