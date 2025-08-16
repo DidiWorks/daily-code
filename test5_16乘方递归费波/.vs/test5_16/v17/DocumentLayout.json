@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "E:\\GitHub_code\\daily-code\\test5_16\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{5DBAD13C-74B4-4E3B-AF29-4A56755E2269}|test5_16\\test5_16.vcxproj|E:\\GitHub_code\\daily-code\\test5_16\\test5_16\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{5DBAD13C-74B4-4E3B-AF29-4A56755E2269}|test5_16\\test5_16.vcxproj|solutionrelative:test5_16\\test.c||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "test.c",
+              "DocumentMoniker": "E:\\GitHub_code\\daily-code\\test5_16\\test5_16\\test.c",
+              "RelativeDocumentMoniker": "test5_16\\test.c",
+              "ToolTip": "E:\\GitHub_code\\daily-code\\test5_16\\test5_16\\test.c",
+              "RelativeToolTip": "test5_16\\test.c",
+              "ViewState": "AgIAAEIAAAAAAAAAAAAkwEgAAAALAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000423|",
+              "WhenOpened": "2025-05-16T10:00:25.752Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

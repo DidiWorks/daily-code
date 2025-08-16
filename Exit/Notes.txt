@@ -1,0 +1,172 @@
+#Persistent   //让脚本持续运行，不是运行完就退出，这个后续可以直接删除
+#SingleInstance, Force  //确保脚本只运行一个实例如果已有实例在运行,则强制关闭旧实例并启动新实例
+SetControlDelay, -1  //设置控制延时
+SetMouseDelay, 20    //设置鼠标延时
+SetWinDelay, 200     //设置窗口延时
+SetBatchLines, 20ms  //设置脚本执行速度，防止脚本占用太多CPU资源
+CoordMode, Mouse, Screen  //设置鼠标坐标模式为屏幕坐标而不是活动窗口
+RunAsAdmin()  //以管理员最高权限运行
+
+; 全局变量
+global RefreshInProgress := false //作为标记状态，检查刷新是否在进行
+global ErrorCount := 0  //记录错误发生次数
+global MaxErrors := 3  //允许最大错误次数
+
+; [新增] 添加鼠标检测定时器
+SetTimer, WatchMouseClick, 100
+
+; 直接执行刷新
+Refresh()
+
+; [新增] 鼠标点击检测函数
+WatchMouseClick:
+    if (!RefreshInProgress) //如果没有刷新在进行直接返回
+        return
+        
+    ; 检测鼠标左键状态
+    GetKeyState, LButton, LButton, P //检测鼠标左键的物理状态，存储在LButton，这个P是检测物理点击而不是逻辑判断
+    
+    ; 如果检测到鼠标左键被按下
+    if (LButton == "D") {
+        Log("检测到鼠标左键点击，脚本退出")
+        ExitApp
+    }
+return
+
+; 主刷新功能
+Refresh() {
+    RefreshInProgress := true //开关打开
+    
+    ; 检查并确保iVMS-4200运行
+    if (!CheckIVMS()) {                                 //检测窗口
+        Log("iVMS-4200未运行，尝试启动...")       
+        CheckAndRestartIVMS()                   //如果返回值是0尝试启动
+        Sleep, 15000
+    }
+    
+    ; 激活iVMS-4200窗口
+    SetTitleMatchMode, 2     //设置窗口标题匹配模式2，匹配窗口标题中包含的字符串，只要窗口标题中包含指定字符串，就会匹配成功
+    WinActivate, iVMS-4200   //ahk的一个内置命令，用于激活当前窗口
+    WinWaitActive, iVMS-4200, , 10   //暂停10
+    if !WinActive("iVMS-4200")       
+    {
+        ErrorCount++
+        Log("错误：无法激活iVMS-4200窗口！错误次数: " . ErrorCount)
+        if (ErrorCount >= MaxErrors) {
+            RestartIVMS()      //在次启动
+            ErrorCount := 0    //启动错误计数返回值为0
+        }
+        RefreshInProgress := false    //脚本暂停
+        return
+    }
+    Sleep, 2000
+    
+    ; 退出全屏模式
+    Send, {Esc}
+    Sleep, 2000
+    
+    ; 定义每组操作的坐标
+    Groups := []
+    Groups.Push({LoopX: 1656, LoopY: 260, NodeX: 140, NodeY: 170})   ; 第1组
+    Groups.Push({LoopX: 1297, LoopY: 248, NodeX: 146, NodeY: 396})   ; 第2组
+    Groups.Push({LoopX: 864, LoopY: 215, NodeX: 150, NodeY: 266})    ; 第3组
+    Groups.Push({LoopX: 483, LoopY: 211, NodeX: 162, NodeY: 330})    ; 第4组
+    Groups.Push({LoopX: 1679, LoopY: 534, NodeX: 141, NodeY: 360})   ; 第5组
+    Groups.Push({LoopX: 1301, LoopY: 527, NodeX: 155, NodeY: 204})   ; 第6组
+    Groups.Push({LoopX: 908, LoopY: 531, NodeX: 146, NodeY: 810})    ; 第7组
+    Groups.Push({LoopX: 488, LoopY: 539, NodeX: 173, NodeY: 934})    ; 第8组
+    Groups.Push({LoopX: 1716, LoopY: 826, NodeX: 169, NodeY: 935})   ; 第9组
+    Groups.Push({LoopX: 1301, LoopY: 802, NodeX: 165, NodeY: 938})   ; 第10组
+    Groups.Push({LoopX: 909, LoopY: 826, NodeX: 157, NodeY: 906})    ; 第11组
+    Groups.Push({LoopX: 507, LoopY: 818, NodeX: 159, NodeY: 936})    ; 第12组
+
+    ; 遍历每组操作
+    for index, group in Groups {
+        Try {
+            Log("开始刷新第 " index " 组摄像头...")
+            
+            SmoothMove(group.LoopX, group.LoopY, 30)
+            Sleep, 4000
+            Click
+            
+            SmoothMove(group.NodeX, group.NodeY, 30)
+            Sleep, 4000
+            Click, 2
+            
+            Sleep, 4000
+            Click, 2
+            
+            Log("第 " index " 组摄像头刷新完成。")
+            Sleep, 10000
+            
+            ; 每2组释放一次内存
+            if (Mod(index, 2) = 0) {
+                DllCall("psapi.dll\EmptyWorkingSet", "UInt", -1)
+                Sleep, 5000
+            }
+        } Catch e {
+            Log("操作失败：第 " index " 组摄像头刷新失败")
+            ErrorCount++
+            if (ErrorCount >= 3) {
+                break
+            }
+            Send, {Esc}
+            Sleep, 2000
+        }
+    }
+    
+    ; 最后点击全屏按钮
+    SmoothMove(1851, 989, 30)
+    Sleep, 3000
+    Click
+    
+    RefreshInProgress := false
+    ErrorCount := 0
+    
+    ; 完成后退出脚本
+    Log("所有操作完成，脚本正常退出")
+    ExitApp
+}
+
+; 基础函数
+SmoothMove(x, y, speed := 30)  
+{
+    MouseGetPos, currX, currY
+    stepX := (x - currX) / speed
+    stepY := (y - currY) / speed
+    Loop, %speed% {
+        currX += stepX
+        currY += stepY
+        MouseMove, %currX%, %currY%, 0
+        Sleep, 20
+    }
+    MouseMove, x, y, 0
+}
+
+CheckIVMS() {
+    return WinExist("iVMS-4200") //是ahk的一个内置函数，WinExist的返回值1表示找到，0表示未找到，这个返回值用来监视窗口是否正常
+}
+
+CheckAndRestartIVMS() {
+    Run, "C:\Program Files (x86)\iVMS-4200 Site\iVMS-4200 Client\Client\iVMS-4200.Framework.C.exe"  //iVMS-4200启动路径
+    Sleep, 15000
+}
+
+RestartIVMS() {
+    Process, Close, iVMS-4200.Framework.C.exe
+    Sleep, 5000
+    Run, "C:\Program Files (x86)\iVMS-4200 Site\iVMS-4200 Client\Client\iVMS-4200.Framework.C.exe"
+    Sleep, 15000
+}
+
+RunAsAdmin() {
+    if not A_IsAdmin {
+        Run *RunAs "%A_ScriptFullPath%"
+        ExitApp
+    }
+}
+
+Log(message) {
+    LogFilePath := A_Desktop . "\script_log.txt"
+    FileAppend, %A_Now% - %message%`n, %LogFilePath%
+}
