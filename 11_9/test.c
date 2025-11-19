@@ -1,0 +1,31 @@
+#include"SeqList.h"
+
+
+void SLTest01()
+{
+	SL sl;
+	SLInit(&sl);
+
+	SLPushBack(&sl, 1);
+	SLPushBack(&sl, 2);
+	SLPushBack(&sl, 3);
+	SLPushBack(&sl, 4);
+	SLPrint(sl);
+
+	/*SLPushBack(NULL, 5);*/
+	SLPushFront(&sl, 5);
+	SLPushFront(&sl, 6);
+	SLPrint(sl);
+
+
+	SLDestroy(&sl);
+}
+
+
+int main()
+{
+	SLTest01();
+
+	return 0;
+ }
+	 
