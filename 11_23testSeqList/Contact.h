@@ -1,0 +1,50 @@
+#pragma once
+//#include"SeqList.h"
+//定义联系人数据结构
+
+
+# define NAME_MAX 20
+# define GENDER_MAX 10
+# define TEL_MAX 20
+# define ADDR_MAX 100
+
+// 姓名 性别 年龄 电话 地址
+typedef struct personInfo
+{
+	char name[NAME_MAX];
+	char gender[GENDER_MAX];
+	int age;
+	char tel[TEL_MAX];
+	char addr[ADDR_MAX];
+
+}peoInfo;
+
+
+//前置声明
+//struct SeqList;
+//tyop struct SeqList Contact;
+
+//通讯录方法 
+
+
+//顺序表重新定义成名字为通讯录
+typedef struct SeqList Contact;
+
+
+//初始化  实际上是对顺序表的初始化
+//初始化
+void ContactInit(Contact* con);
+//销毁
+void ContactDesTroy(Contact* con);
+//添加
+void ContactAdd(Contact* con);
+//删除
+void ContactDel(Contact* con);
+//修改
+void ContactModify(Contact* con);
+// 查找
+void ContactFind(Contact* con);
+// 展示
+void  ContactShow(Contact* con);
+
+
