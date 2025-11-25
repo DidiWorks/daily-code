@@ -50,54 +50,55 @@
 
 
 
-//Ò»¸öÊı×énums £¬ Ò»¸öÖµval  Ô­µØÒÆ³ıËùÓĞval		
+//ä¸€ä¸ªæ•°ç»„nums ï¼Œ ä¸€ä¸ªå€¼val  åŸåœ°ç§»é™¤æ‰€æœ‰val		
 
 
-//int removeElement(int* nums, int numsSize, int val)
-//{
-//	int src, dst;
-//	src = dst = 0;
-//	while (src < numsSize)
-//	{
-//		if (nums[src] == val)
-//		{
-//			src++;
-//		}
-//		else {
-//			nums[dst] = nums[src];
-//			dst++;
-//			src++;
-//		}
-//	}
-//	return dst;
-//
-//}
-//int main() {
-//    // 1. ×¼±¸Ò»¸ö²âÊÔÓÃÀı
-//    int nums[] = { 0, 1, 2, 2, 3, 0, 4, 2 }; // ÊäÈëÊı×é
-//    int val = 2;                            // ÒªÒÆ³ıµÄÖµ
-//    int size = sizeof(nums) / sizeof(nums[0]); // ¼ÆËãÊı×é´óĞ¡
-//
-//    // 2. ´òÓ¡Ô­Ê¼Êı×é
-//    printf("Ô­Ê¼Êı×é: ");
-//    for (int i = 0; i < size; i++) {
-//        printf("%d ", nums[i]);
-//    }
-//    printf("\nÒªÒÆ³ıµÄÔªËØ: %d\n", val);
-//    printf("--------------------------\n");
-//
-//    // 3. µ÷ÓÃÄãĞ´µÄº¯Êı
-//    int k = removeElement(nums, size, val);
-//
-//    // 4. ´òÓ¡½á¹û
-//    printf("º¯Êı·µ»ØµÄĞÂ³¤¶È k = %d\n", k);
-//    printf("´¦ÀíºóÊı×éµÄÇ° %d ¸öÔªËØ: ", k);
-//    for (int i = 0; i < k; i++) {
-//        printf("%d ", nums[i]);
-//    }
-//    printf("\n");
-//
-//    // ·ÀÖ¹´°¿ÚÒ»ÉÁ¶ø¹ı
-//    system("pause");
-//    return 0;
-//}
+int removeElement(int* nums, int numsSize, int val)
+{
+	int src, dst;
+	src = dst = 0;
+	while (src < numsSize)
+	{
+		if (nums[src] == val)
+		{
+			src++;
+		}
+		else {
+			nums[dst] = nums[src];
+			dst++;
+			src++;
+		}
+	}
+	return dst;
+
+}
+int main() {
+   // 1. å‡†å¤‡ä¸€ä¸ªæµ‹è¯•ç”¨ä¾‹
+   int nums[] = { 0, 1, 2, 2, 3, 0, 4, 2 }; // è¾“å…¥æ•°ç»„
+   int val = 2;                            // è¦ç§»é™¤çš„å€¼
+   int size = sizeof(nums) / sizeof(nums[0]); // è®¡ç®—æ•°ç»„å¤§å°
+
+   // 2. æ‰“å°åŸå§‹æ•°ç»„
+   printf("åŸå§‹æ•°ç»„: ");
+   for (int i = 0; i < size; i++) {
+       printf("%d ", nums[i]);
+   }
+   printf("\nè¦ç§»é™¤çš„å…ƒç´ : %d\n", val);
+   printf("--------------------------\n");
+
+   // 3. è°ƒç”¨ä½ å†™çš„å‡½æ•°
+   int k = removeElement(nums, size, val);
+
+   // 4. æ‰“å°ç»“æœ
+   printf("å‡½æ•°è¿”å›çš„æ–°é•¿åº¦ k = %d\n", k);
+   printf("å¤„ç†åæ•°ç»„çš„å‰ %d ä¸ªå…ƒç´ : ", k);
+   for (int i = 0; i < k; i++) {
+       printf("%d ", nums[i]);
+   }
+   printf("\n");
+
+   // é˜²æ­¢çª—å£ä¸€é—ªè€Œè¿‡
+   system("pause");
+   return 0;
+
+}
